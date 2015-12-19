@@ -1,5 +1,6 @@
 package com.java.myapp;
 
+import java.io.File;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
@@ -18,6 +19,14 @@ public class Dialog {
     public static void FileError(String name) {
         JOptionPane.showMessageDialog(null,
                 "File " + name + "\nError !!!",
+                "Error!",
+                JOptionPane.ERROR_MESSAGE);
+        System.exit(0);
+    }
+
+    public static void FileError(File file) {
+        JOptionPane.showMessageDialog(null,
+                "File " + file.getName() + "\nError !!!",
                 "Error!",
                 JOptionPane.ERROR_MESSAGE);
         System.exit(0);

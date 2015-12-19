@@ -10,27 +10,27 @@ public class IP_Mac {
 
     public static void main(String[] args) {
         Dialog.setLAF();
-        int error = -1;
+        int fileError = -1;
         Selectfile Select = new Selectfile();
+        Wait wait = new Wait();
         try {
-
             if (Select.getChooser().getSelectedFile().getName().contains(".txt")) {
                 new File(Select.getChooser().getSelectedFile().getPath().split(".txt")[0] + ".csv").delete();
                 BufferedReader br = new BufferedReader(new FileReader(Select.getFile()));
                 String pathOutput = Select.getFile().getPath().split("\\.")[0] + ".csv";
-                Wait wait = new Wait();
                 Sub(br, pathOutput);
                 wait.dispose();
                 System.exit(0);
             } else {
-                Wait wait = new Wait();
                 for (File fileFolder : Select.getFile().listFiles()) {
                     if (fileFolder.getName().contains(".csv")) {
                         fileFolder.delete();
+                        fileError++;
                     }
                     if (fileFolder.getName().contains(".txt")) {
                         BufferedReader br = new BufferedReader(new FileReader(fileFolder));
                         String pathOutput = fileFolder.getPath().split("\\.")[0] + ".csv";
+                        fileError++;
                         Sub(br, pathOutput);
                     }
                 }
@@ -41,8 +41,12 @@ public class IP_Mac {
             System.exit(0);
         } catch (Exception ex) {
             ex.printStackTrace();
-            error++;
-            Dialog.FileError(Select.getFileFolder()[0].getName());
+            wait.dispose();
+            if (Select.getFile().getName().contains(".txt")) {
+                Dialog.FileError(Select.getFile());
+            } else {
+                Dialog.FileError(Select.getFileFolder()[fileError].getName());
+            }
         }
     }
 
