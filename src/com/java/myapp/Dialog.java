@@ -1,11 +1,11 @@
-
 package com.java.myapp;
 
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 public class Dialog {
-     public static void setLAF() {
+
+    public static void setLAF() {
 
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -14,12 +14,13 @@ public class Dialog {
 
         }
     }
-    static void FileError(String name) {
+
+    public static void FileError(String name) {
         JOptionPane.showMessageDialog(null,
-                "File "+ name +"\nError !!!",
+                "File " + name + "\nError !!!",
                 "Error!",
                 JOptionPane.ERROR_MESSAGE);
         System.exit(0);
     }
-     
+
 }
